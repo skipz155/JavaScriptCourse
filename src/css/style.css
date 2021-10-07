@@ -1,9 +1,10 @@
 body button {
-	padding: 10px;
-	border: none;
+	padding: 10px 15px;
+	border: 21;
 	border-radius: 10px;
-	letter-spacing: 1px;
+	letter-spacing: 2px;
 	text-transform: uppercase;
-	color: #b51f1f;
-	background: #da9595;
+	color: #351010;
+	background: #b1a7a7;
+	width: 60px;
 }
