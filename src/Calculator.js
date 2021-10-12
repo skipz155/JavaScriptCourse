@@ -7,57 +7,92 @@ export default class Calculator extends Component {
 			value: "",
 			storedValues: [],
 			operation: "_",
+			isEqualClicked: false,
+			isComma: false,
 		};
 	}
 
 	handleClickValue = (e) => {
-		//if (this.state.value === "0") {
+		if (e === "=") {
+			this.setState({ isEqualClicked: true });
+			this.operationController(this.state.value);
+		} else if (e !== "=") {
+			this.setState({
+				value: this.state.value.toString() + e,
+			});
+		}
+		//if (this.state.storedValues.length < 0) this.setState({ operation: "_" });
 
-		this.setState({
-			value: this.state.value.toString() + e,
-			//storedValues: [...this.state.storedValues, e],
-		});
-
-		//}
 		console.log(this.state.value);
-		if (this.state.operation === "+" && this.state.storedValues.length > 0) {
-			// this.setState({ value: this.state.storedValues.pop + e });
-			this.setState({
-				value: parseInt(this.state.storedValues.pop()) + parseInt(e),
-				operation: "_",
-			});
-		}
-		if (this.state.operation === "-" && this.state.storedValues.length > 0) {
-			// this.setState({ value: this.state.storedValues.pop + e });
-			this.setState({
-				value: parseInt(this.state.storedValues.pop()) - parseInt(e),
-				operation: "_",
-			});
-		}
-
-		// console.log(
-		// 	this.state.value,
-		// 	this.state.storedValues,
-		// 	this.state.operation
-		// );
 	};
 
 	handleClickOperation = (e) => {
 		if (e === "XXX") this.setState({ value: "" });
-		if (e !== "XXX") {
+		if (e !== "XXX" && (e !== "," && this.state.storedValues.length) === 0) {
 			this.setState({
 				storedValues: [...this.state.storedValues, this.state.value],
+				value: "",
 			});
 		}
+		if (e === ",") {
+			if (!this.state.isComma) {
+				this.setState({
+					value: this.state.value.toString() + ".",
+					isComma: true,
+				});
+			}
+		}
+
+		//if (!this.state.value === 0 || !this.state.storedValues.length === 0) {
 		if (e === "+") this.setState({ operation: "+" });
 		if (e === "-") this.setState({ operation: "-" });
+		if (e === "X") this.setState({ operation: "X" });
+		if (e === "/") this.setState({ operation: "/" });
+		//}
+	};
+
+	operationController = (e) => {
+		if (this.state.operation === "+" && this.state.storedValues.length > 0) {
+			this.setState({
+				value: parseFloat(this.state.storedValues.pop()) + parseFloat(e),
+				operation: "_",
+				isEqualClicked: false,
+			});
+		}
+		if (this.state.operation === "-" && this.state.storedValues.length > 0) {
+			this.setState({
+				value: parseFloat(this.state.storedValues.pop()) - parseFloat(e),
+				operation: "_",
+				isEqualClicked: false,
+			});
+		}
+		if (this.state.operation === "X" && this.state.storedValues.length > 0) {
+			this.setState({
+				value: parseFloat(this.state.storedValues.pop()) * parseFloat(e),
+				operation: "_",
+				isEqualClicked: false,
+			});
+		}
+		if (this.state.operation === "/" && this.state.storedValues.length > 0) {
+			this.setState({
+				value: parseFloat(this.state.storedValues.pop()) / parseFloat(e),
+				operation: "_",
+				isEqualClicked: false,
+			});
+		}
+		this.setState({ isComma: false });
 	};
 
 	render() {
 		let { value } = this.state;
+		let { storedValues } = this.state;
+		let { operation } = this.state;
 
 		return (
 			<div>
+				<h4>
+					{storedValues} , operation: {operation}
+				</h4>
 				<h3>: {value}</h3>
 				<div>
 					<button>%</button>
@@ -87,10 +122,10 @@ export default class Calculator extends Component {
 					<button onClick={() => this.handleClickOperation("+")}>+</button>
 				</div>
 				<div>
-					<button>//</button>
+					<button onClick={() => this.handleClickOperation("/")}>/</button>
 					<button onClick={() => this.handleClickValue(0)}>0</button>
 					<button onClick={() => this.handleClickOperation(",")}>,</button>
-					<button onClick={() => this.handleClickOperation("=")}>=</button>
+					<button onClick={() => this.handleClickValue("=")}>=</button>
 				</div>
 			</div>
 		);
