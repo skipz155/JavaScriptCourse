@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import HighScore from "./HighScore";
 import "./css/style.css";
+import Calculator from "./Calculator";
 
 class Application extends Component {
 	constructor(props) {
@@ -20,13 +21,13 @@ class Application extends Component {
 	componentDidUpdate(props, state) {
 		console.log("Updated from", state, "to", this.state);
 
-		if (
-			this.state.count > 10 &&
-			this.state.count !== state.count &&
-			!this.state.overTen
-		) {
-			this.setState({ overTen: true });
-		}
+		// if (
+		// 	this.state.count > 10 &&
+		// 	this.state.count !== state.count &&
+		// 	!this.state.overTen
+		// ) {
+		// 	this.setState({ overTen: true });
+		// }
 	}
 
 	resetCount = (e) => {
@@ -42,17 +43,7 @@ class Application extends Component {
 
 		return (
 			<div>
-				<h1>
-					Hello {name} you clicked button {count} times
-				</h1>
-				<HighScore
-					overTen={this.state.overTen}
-					onReset={(e) => this.resetCount(e)}
-				></HighScore>
-
-				<span>
-					<button onClick={(e) => this.handleClick(e)}>ClickMe</button>
-				</span>
+				<Calculator />
 			</div>
 		);
 	}
