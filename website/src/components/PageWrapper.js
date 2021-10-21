@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import navbarImg from "../assets/img/navbar-logo.svg";
+import { Link } from "react-router-dom";
 
 export default class PageWrapper extends Component {
 	render() {
@@ -10,10 +11,10 @@ export default class PageWrapper extends Component {
 					id="mainNav"
 				>
 					<div className="container">
-						<a className="navbar-brand" href="#page-top">
+						<Link className="navbar-brand" to="/">
 							{/* <img src="../assets/img/navbar-logo.svg" alt=" asd" /> */}
 							<img src={navbarImg} alt="logo" width="150" />
-						</a>
+						</Link>
 						<button
 							className="navbar-toggler"
 							type="button"
@@ -29,29 +30,29 @@ export default class PageWrapper extends Component {
 						<div className="collapse navbar-collapse" id="navbarResponsive">
 							<ul className="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
 								<li className="nav-item">
-									<a className="nav-link" href="#services">
+									<Link className="nav-link" to="/services">
 										Services
-									</a>
+									</Link>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href="#portfolio">
+									<Link className="nav-link" to="/portfolio">
 										Portfolio
-									</a>
+									</Link>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href="#about">
+									<Link className="nav-link" to="/about">
 										About
-									</a>
+									</Link>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href="#team">
+									<Link className="nav-link" to="/team">
 										Team
-									</a>
+									</Link>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href="#contact">
+									<Link className="nav-link" to="/contact">
 										Contact
-									</a>
+									</Link>
 								</li>
 							</ul>
 						</div>
